@@ -1,0 +1,38 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+html,
+body,
+#map {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#startup-info {
+    position: absolute;
+    margin: 1rem;
+    padding: 1rem;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#startup-info .handwritten {
+    font-family: 'Indie Flower', cursive;
+}
+
+#startup-info .logo {
+    width: 30rem;
+}
+
+#startup-info .person * {
+    vertical-align: middle;
+}
+
+#startup-info .person-img {
+    border-radius: 50%;
+    width: 5rem;
+}

@@ -1,0 +1,80 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.594729, 50.349071]
+        },
+        "properties": {
+            "name": "Incentergy GmbH",
+            "logo": "https://www.incentergy.de/wp-content/uploads/2018/05/Logo-Incentergy.png",
+            "website": "https://www.incentergy.de",
+            "address": "Kurfürstenstr. 66",
+            "zipcode": "56068",
+            "city": "Koblenz",
+            "phone": "+49 (0) 173 6322621",
+            "email": "info@incentergy.de",
+            "services": "enterprise resource planning, business software, project management, ecommerce, software development",
+            "person": "Manuel Blechschmidt",
+            "personImg": "https://www.incentergy.de/wp-content/uploads/2018/05/Manuel_Blechschmidt_ski.jpg"
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.596592, 50.356139]
+        },
+        "properties": {
+            "name": "conlabz GmbH",
+            "logo": "https://www.conlabz.de/files/2018/04/conlabz_logo_petrol.png",
+            "website": "https://www.conlabz.de",
+            "address": "Casinostr. 49",
+            "zipcode": "56068",
+            "city": "Koblenz",
+            "phone": "+49 (0) 261 96096060",
+            "email": "info@conlabz.de",
+            "services": "ecommerce, magento, wordpress, php, websites",
+            "person": "Daniel Schmidt",
+            "personImg": "https://media.licdn.com/dms/image/C4D03AQGwFc6VM8FFWA/profile-displayphoto-shrink_800_800/0?e=1535587200&v=beta&t=RppgnRLUGGV3dNGQlF6LGSqo_Koqalzw4EquafrF3Lc"
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.560390, 50.362471]
+        },
+        "properties": {
+            "name": "ECK.ventures GmbH",
+            "logo": "https://www.eck.ventures/fileadmin/img/eckventures-logo.png",
+            "website": "https://www.eck.ventures",
+            "address": "Universitätsstraße 3",
+            "zipcode": "56070",
+            "city": "Koblenz",
+            "phone": "0261/960988-0",
+            "email": "info@eck.ventures",
+            "services": "start up financing, due diligence",
+            "person": "Johannes Utsch",
+            "personImg": "https://media.licdn.com/dms/image/C5103AQFCn84kG9tITw/profile-displayphoto-shrink_800_800/0?e=1535587200&v=beta&t=IPTJDkkgLFAAJFVK_5pasUapWJlej5ayolf5UlGN4EM"
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.560400, 50.362481]
+        },
+        "properties": {
+            "name": "curassist GmbH",
+            "logo": "https://www.curassist.de/images/logo.svg",
+            "website": "https://www.curassist.de/",
+            "address": "Universitätsstraße 3",
+            "zipcode": "56070",
+            "city": "Koblenz",
+            "phone": "0261/960988-0",
+            "email": "mail@curassist.de",
+            "services": "home care, patient care, medical advice, care documentation, software as a service",
+            "person": "Thomas Müller",
+            "personImg": "https://media.licdn.com/dms/image/C5603AQEFe-rQ16eSuQ/profile-displayphoto-shrink_800_800/0?e=1535587200&v=beta&t=ms3QzpjIFl5ZT_RpKNoebywptIfj7ouJIq78s5vX8DM"
+        }
+    }]
+}
