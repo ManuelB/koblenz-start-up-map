@@ -66,7 +66,7 @@
         "properties": {
             "name": "curassist GmbH",
             "logo": "https://www.curassist.de/images/logo.svg",
-            "website": "https://www.curassist.de/",
+            "website": "https://www.curassist.de",
             "address": "Universitätsstraße 3",
             "zipcode": "56070",
             "city": "Koblenz",
@@ -75,6 +75,25 @@
             "services": "home care, patient care, medical advice, care documentation, software as a service",
             "person": "Thomas Müller",
             "personImg": "https://media.licdn.com/dms/image/C5603AQEFe-rQ16eSuQ/profile-displayphoto-shrink_800_800/0?e=1535587200&v=beta&t=ms3QzpjIFl5ZT_RpKNoebywptIfj7ouJIq78s5vX8DM"
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.596141, 50.356424]
+        },
+        "properties": {
+            "name": "FruchtFuchs e.K.",
+            "logo": "https://www.fruchtfuchs.de/assets/layout/img/logo.png",
+            "website": "https://www.fruchtfuchs.de",
+            "address": "Schloßstraße 21",
+            "zipcode": "56068",
+            "city": "Koblenz",
+            "phone": "0261 39051797",
+            "email": "info@fruchtfuchs.de",
+            "services": "fruits, food, subscriptions, ecommerce",
+            "person": "Mathias Vaßen",
+            "personImg": "https://www.fruchtfuchs.de/assets/images/content/anfrage_fruchtfuchs.png"
         }
     }]
 }
