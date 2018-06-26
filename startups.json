@@ -114,5 +114,24 @@
             "person": "Michael Börsch",
             "personImg": "img/Michael_Boersch.jpg"
         }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.6333174, 50.2036792]
+        },
+        "properties": {
+            "name": "ENAGILE _ Agile Innovation",
+            "logo": "img/enagile-logo.png",
+            "website": "https://www.enagile.de",
+            "address": "Bingener Straße 36",
+            "zipcode": "56154",
+            "city": "Boppard",
+            "phone": "+49 [0]151. 56 84 27 00",
+            "email": "hello@enagile.de",
+            "services": "agile projects & transformation, project management, workshops",
+            "person": "Matthias Bock-Greiss",
+            "personImg": "img/Matthias_Bock-Greiss.jpg"
+        }
     }]
 }
