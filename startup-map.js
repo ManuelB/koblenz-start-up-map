@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (sHash) {
 	    try {
 		    gtag('event', 'startup-focused', {
-			    'event_category': sHash,
+			    'event_label': sHash,
+			    'event_category': 'map'
 		    });
 	    } catch(e) { console.log(e); }
             pStartupsLoaded.then(function(oStartUps) {
