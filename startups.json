@@ -95,5 +95,24 @@
             "person": "Mathias Vaßen",
             "personImg": "https://www.fruchtfuchs.de/assets/images/content/anfrage_fruchtfuchs.png"
         }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.3225043, 50.415568]
+        },
+        "properties": {
+            "name": "Frank Börsch Kälte-Klima-Wärmepumpen",
+            "logo": "https://www.kaelte-boersch.de/typo3conf/ext/tbs/Resources/Public/img/logo.png",
+            "website": "https://www.kaelte-boersch.de",
+            "address": "Kastanienhof 4",
+            "zipcode": "56645",
+            "city": "Nickenich",
+            "phone": "+49 2632 9896660",
+            "email": "info@kaelte-boersch.de",
+            "services": "Kälte, Klima, Wärmepumpen, Klimaanlagen, Sachverständige",
+            "person": "Michael Börsch",
+            "personImg": "img/Michael_Boersch.jpg"
+        }
     }]
 }

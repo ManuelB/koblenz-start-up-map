@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v9',
         center: [7.589907, 50.360023],
-        zoom: 13
+        zoom: 11
     });
     map.on('load', function() {
 
