@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (sHash) {
             pStartupsLoaded.then(function(oStartUps) {
                 let oStartUp = oStartUps.features.filter(o => o.properties.name == sHash)[0];
+                map.flyTo({ center: oStartUp.geometry.coordinates });
                 let oStartUpInfo = document.getElementById("startup-info");
                 oStartUpInfo.style.width = oStartUp.properties.width;
                 oStartUpInfo.style.height = oStartUp.properties.width;
@@ -48,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
         map.on('click', 'startups', function(e) {
-            map.flyTo({ center: e.features[0].geometry.coordinates });
             window.location.hash = encodeURIComponent(e.features[0].properties.name);
         });
 
