@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 render(fnStartUpInfoTemplate(oStartUp.properties), oStartUpInfo);
             });
         } else {
-            let oBaseTemplate = () => html `<h1 class="handwritten">Start Up Map Koblenz</h1><p>Click on the rockets to see the Start Ups</p>`;
+            let oBaseTemplate = () => html `<h1 class="handwritten">Start Up Map Koblenz</h1><p>Click on the rockets to see the Start Ups</p><p>Click on the stars to see a supporting company.</p>`;
             render(oBaseTemplate(), document.getElementById("startup-info"));
         }
     }
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     "data": oStartUps
                 },
                 "layout": {
-                    "icon-image": "rocket-15"
+                    "icon-image": "{marker}-15"
                 }
             });
         });

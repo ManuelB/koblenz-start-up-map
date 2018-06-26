@@ -7,6 +7,7 @@
             "coordinates": [7.594729, 50.349071]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "Incentergy GmbH",
             "logo": "https://www.incentergy.de/wp-content/uploads/2018/05/Logo-Incentergy.png",
             "website": "https://www.incentergy.de",
@@ -26,6 +27,7 @@
             "coordinates": [7.596592, 50.356139]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "conlabz GmbH",
             "logo": "https://www.conlabz.de/files/2018/04/conlabz_logo_petrol.png",
             "website": "https://www.conlabz.de",
@@ -45,6 +47,7 @@
             "coordinates": [7.560390, 50.362471]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "ECK.ventures GmbH",
             "logo": "https://www.eck.ventures/fileadmin/img/eckventures-logo.png",
             "website": "https://www.eck.ventures",
@@ -64,6 +67,7 @@
             "coordinates": [7.560400, 50.362481]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "curassist GmbH",
             "logo": "https://www.curassist.de/images/logo.svg",
             "website": "https://www.curassist.de",
@@ -83,6 +87,7 @@
             "coordinates": [7.596141, 50.356424]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "FruchtFuchs e.K.",
             "logo": "https://www.fruchtfuchs.de/assets/layout/img/logo.png",
             "website": "https://www.fruchtfuchs.de",
@@ -102,6 +107,7 @@
             "coordinates": [7.3225043, 50.415568]
         },
         "properties": {
+            "marker" : "star",
             "name": "Frank Börsch Kälte-Klima-Wärmepumpen",
             "logo": "https://www.kaelte-boersch.de/typo3conf/ext/tbs/Resources/Public/img/logo.png",
             "website": "https://www.kaelte-boersch.de",
@@ -121,6 +127,7 @@
             "coordinates": [7.6333174, 50.2036792]
         },
         "properties": {
+            "marker" : "rocket",
             "name": "ENAGILE _ Agile Innovation",
             "logo": "img/enagile-logo.png",
             "website": "https://www.enagile.de",
