@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function fnHashChange() {
         let sHash = decodeURIComponent(window.location.hash).substring(1);
         if (sHash) {
+	    try {
+		    gtag('event', 'startup-focused', {
+			    'event_category': sHash,
+		    });
+	    } catch(e) { console.log(e); }
             pStartupsLoaded.then(function(oStartUps) {
                 let oStartUp = oStartUps.features.filter(o => o.properties.name == sHash)[0];
                 map.flyTo({ center: oStartUp.geometry.coordinates });
