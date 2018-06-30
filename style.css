@@ -19,14 +19,36 @@ body,
     background-color: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-@media only screen and (max-width : 50rem) {
+
+#imprint {
+    position: absolute;
+    left: 50%;
+    margin-left: -7.3rem;
+    bottom: 0;
+    width: auto;
+    z-index: 11;
+    background: white;
+    text-align: center;
+    padding: 0.3rem;
+    font-size: 80%;
+    width: 14rem;
+}
+
+@media only screen and (max-width: 50rem) {
     #startup-info {
         margin: 0;
-	padding: 3%;
-	bottom: 0;
-	width: 94%;
-	height: 24%;
-	overflow: auto;
+        padding: 3%;
+        bottom: 0;
+        width: 94%;
+        height: 24%;
+        overflow: auto;
+    }
+    #imprint {
+        top: 0;
+        left: auto;
+        right: 0;
+        margin-left: 0;
+        bottom: auto;
     }
 }
 

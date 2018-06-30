@@ -8,25 +8,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6146718-17"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6146718-17"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'UA-6146718-17');
-  </script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-6146718-17', {
+            'anonymize_ip': true
+        });
+    </script>
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
     <link href='style.css' rel='stylesheet' />
-    
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '596459477406669',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <script src='startup-map.js' type="module"></script>
 </head>
 
 <body>
     <div id="startup-info">
     </div>
+    <div id="imprint"><a href="imprint-data-privacy.html">Impressum &amp; Datenschutzerklärung</a></div>
     <div id='map'></div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 </body>
