@@ -7,11 +7,16 @@ var StartUpMap = function() {
     // App Access Token
     this.facebookAccessToken = "596459477406669|fLY1Ckxs-uWttk-RnBOmKJdiiIs";
 
-    var fnResolve;
+    var fnResolveStartUpsLoaded;
     this.pStartupsLoaded = new Promise(function(resolve) {
-        fnResolve = resolve;
+        fnResolveStartUpsLoaded = resolve;
     });
-    this.fnResolve = fnResolve;
+    var fnResolveMeetupEventsLoaded;
+    this.pMeetupEventsLoaded = new Promise(function(resolve) {
+        fnResolveMeetupEventsLoaded = resolve;
+    });
+    this.fnResolveStartUpsLoaded = fnResolveStartUpsLoaded;
+    this.fnResolveMeetupEventsLoaded = fnResolveMeetupEventsLoaded;
     this.fnStartUpInfoTemplate = (startup) => html `<img src="${startup.logo}" class="logo" alt="Logo of ${startup.name}" /><br />
 		<h1>${startup.name}</h1>
 		<a href="${startup.website}">${startup.website}</a><br />
@@ -79,6 +84,7 @@ StartUpMap.prototype.onMapLoad = function() {
 
     this.loadStartUpsLayer();
     this.loadEventLayer();
+    this.loadMeetupEvents();
 };
 StartUpMap.prototype.loadStartUpsLayer = function() {
     var me = this;
@@ -90,7 +96,7 @@ StartUpMap.prototype.loadStartUpsLayer = function() {
     fetch("startups.json").then(function(response) {
         return response.json();
     }).then(function(oStartUps) {
-        me.fnResolve(oStartUps);
+        me.fnResolveStartUpsLoaded(oStartUps);
         me.map.addLayer({
             "id": "startups",
             "type": "symbol",
@@ -141,13 +147,13 @@ StartUpMap.prototype.loadEventLayer = function() {
             .setLngLat(e.lngLat)
             .setHTML("<h1>" + oFeatureProperties.name +
                 "</h1>" +
-                "<a href=\"https://www.facebook.com/events/" + oFeatureProperties.id + "\">Facebook Event</a>" +
+                oFeatureProperties.link +
                 "<p>" + oFeatureProperties.description +
                 "<br />Start: " + oFeatureProperties.start_time +
-                "<br />Ende: " + oFeatureProperties.end_time + "</p>" +
+                ("end_time" in oFeatureProperties ? ("<br />Ende: " + oFeatureProperties.end_time + "</p>") : "") +
                 "<address>" + oFeatureProperties.place_name + "<br />" +
                 oFeatureProperties.place_location_street + "<br/>" +
-                oFeatureProperties.place_location_zip + " " + oFeatureProperties.place_location_city + "<br/><br/></address>")
+                (oFeatureProperties.place_location_zip ? oFeatureProperties.place_location_zip : "") + " " + oFeatureProperties.place_location_city + "<br/><br/></address>")
             .addTo(me.map);
     });
 
@@ -175,9 +181,13 @@ StartUpMap.prototype.loadEventLayer = function() {
                 return response.json();
             }));
         }
+        aPromises.push(me.pMeetupEventsLoaded.then(function(oMeetups) {
+            return new Promise(function(resolve) {
+                resolve({ "data": oMeetups.events.map(me.mapMeetupEventToFacebookEvent) });
+            });
+        }));
         return Promise.all(aPromises);
     }).then(function(aFacebookPageEvents) {
-        // console.log(aFacebookPageEvents);
 
         var aEvents = [];
         aFacebookPageEvents.forEach(function(oItem) {
@@ -191,10 +201,15 @@ StartUpMap.prototype.loadEventLayer = function() {
                 "marker": "circle",
                 "description": oEvent.description,
                 "start_time": oEvent.start_time,
-                "end_time": oEvent.end_time,
+                "end_time": oEvent.end_time
             };
             var latitude = 0;
             var longitude = 0;
+            if ("link" in oEvent) {
+                oProperties["link"] = oEvent.link;
+            } else {
+                oProperties["link"] = "<a href=\"https://www.facebook.com/events/" + oEvent.id + "\">Facebook Event</a>";
+            }
             if ("place" in oEvent) {
                 oProperties["place_name"] = oEvent.place.name;
                 oProperties["place_location_city"] = oEvent.place.location.city;
@@ -231,7 +246,40 @@ StartUpMap.prototype.loadEventLayer = function() {
         });
     });
 };
+StartUpMap.prototype.loadMeetupEvents = function() {
+    var s = document.createElement("script");
+    s.src = "https://api.meetup.com/find/upcoming_events?photo-host=public&page=50&text=startup&sig_id=14054730&radius=13&lon=7.5999440999996&lat=50.353224782727&sig=be523bc1afa1753483dd6e971c8cd506c5ecd29e&callback=displayMeetUpMeetings";
+    document.body.appendChild(s);
+};
+StartUpMap.prototype.showMeetupEvents = function(oEventMeetupEvents) {
+    this.fnResolveMeetupEventsLoaded(oEventMeetupEvents);
+};
+StartUpMap.prototype.mapMeetupEventToFacebookEvent = function(oMeetupEvent) {
+    return {
+        "name": oMeetupEvent.name,
+        "id": oMeetupEvent.id,
+        "marker": "circle",
+        "description": oMeetupEvent.description,
+        "start_time": oMeetupEvent.local_date + " " + oMeetupEvent.local_time,
+        "link": "<a href=\"" + oMeetupEvent.link + "\">Meetup Event</a>",
+        "place": {
+            "name": oMeetupEvent.venue.name,
+            "location": {
+                "latitude": oMeetupEvent.venue.lat,
+                "longitude": oMeetupEvent.venue.lon,
+                "street": oMeetupEvent.venue.address_1,
+                "city": oMeetupEvent.venue.city,
+                "country": oMeetupEvent.venue.country
+            }
+        }
+    };
+};
 
+var startUpMap;
 document.addEventListener("DOMContentLoaded", function(event) {
-    new StartUpMap();
+    startUpMap = new StartUpMap();
 });
+
+window.displayMeetUpMeetings = function(oEventMeetupEvents) {
+    startUpMap.showMeetupEvents(oEventMeetupEvents.data);
+};

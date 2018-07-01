@@ -1,0 +1,52 @@
+{
+    "city": {
+        "id": 1007769,
+        "city": "Koblenz",
+        "lat": 50.35,
+        "lon": 7.6,
+        "state": "",
+        "country": "de",
+        "zip": "meetup72",
+        "member_count": 16
+    },
+    "events": [{
+        "created": 1529920496000,
+        "duration": 9000000,
+        "id": "252115499",
+        "name": "JM:CONNECT Gründertreff in der Gecko Lounge",
+        "status": "upcoming",
+        "time": 1530721800000,
+        "local_date": "2018-07-04",
+        "local_time": "18:30",
+        "updated": 1529920496000,
+        "utc_offset": 7200000,
+        "waitlist_count": 0,
+        "yes_rsvp_count": 3,
+        "venue": {
+            "id": 24296228,
+            "name": "Gecko Lounge",
+            "lat": 50.36152267456055,
+            "lon": 7.596303939819336,
+            "repinned": false,
+            "address_1": "Gemüsegasse 14a, Mehlgasse 13",
+            "city": "Koblenz",
+            "country": "de",
+            "localized_country_name": "Deutschland"
+        },
+        "group": {
+            "created": 1441044849000,
+            "name": "Startup League Koblenz",
+            "id": 18886129,
+            "join_mode": "open",
+            "lat": 50.349998474121094,
+            "lon": 7.599999904632568,
+            "urlname": "startupleaguekoblenz",
+            "who": "Freunde",
+            "localized_location": "Koblenz, Deutschland",
+            "region": "de_DE"
+        },
+        "link": "https://www.meetup.com/de-DE/startupleaguekoblenz/events/252115499/",
+        "description": "<p>Thema am 04.07.2018:<br/>Vermarktungskonzepte für neue Ideen</p> <p>Als Gründer oder Nachfolger im Familienunternehmen gehst Du gerade den nächsten beruflichen Schritt in Deiner Karriere. Das beeinflusst Dich, Deine Familie, Deine potentiellen Arbeitnehmer, bisherige oder neu zu erschließende Geschäftsfelder. Natürlich stehst Du immer wieder vor vielen Hard-Facts-Fragen und Soft-Skills-Themen.</p> <p>Mit der Gründerreihe JM:CONNECT vom Jungen Mittelstand des BVMW sprechen wir gezielt Euch an:<br/>1. die die gründen möchten,<br/>2. gerade gegründet haben oder<br/>3. ein Unternehmen übernehmen.</p> <p>Wer sind wir?<br/>Wir sind alle selbst Jungunternehmer und Gründer.</p> <p>Warum machen wir das?<br/>Einerseits um sich untereinander zu vernetzen und kennenzulernen, andererseits um direkte, konkrete Hilfestellung, Tipps und Empfehlungen auszutauschen, ggf. miteinander zu arbeiten oder für bessere Rahmenbedingungen in unserer Region einzustehen.</p> <p>An wen richtet sich der Gründertreff?<br/>An alle Personen, die sich informieren und in einen direkten Austausch mit anderen Jungunternehmern und Gründern kommen möchten.</p> <p>Was wird beim Gründertreff gemacht?<br/>Neben einem Mini-Impulsvortrag zur Anregung gibt es bei jedem Treff zwei Round Tables mit Moderatoren zu diversen Themen.</p> ",
+        "visibility": "public"
+    }]
+}
