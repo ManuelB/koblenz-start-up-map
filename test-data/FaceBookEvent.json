@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "description": "Test Event",
+      "end_time": "2018-07-31T21:00:00+0200",
+      "name": "Test Event für die Startup Map Koblenz",
+      "place": {
+        "name": "Rhein-Mosel-Halle",
+        "location": {
+          "city": "Koblenz",
+          "country": "Germany",
+          "latitude": 50.353224782727,
+          "longitude": 7.5999440999996,
+          "street": "Julius-Wegeler-Straße 6",
+          "zip": "56068"
+        },
+        "id": "168943840543039"
+      },
+      "start_time": "2018-07-31T18:00:00+0200",
+      "id": "182696892425882"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUjdoN1RLQlFsOVJWWWNtM2JZATmh3bmNxZA04teWxuME5vRlAyZA01vVnFCR21kZAVNiaDg0QzBiaF9vX1pzbUtMd3gwVEtDazdsWE12eldnd19fU1hiR0d3",
+      "after": "QVFIUjdoN1RLQlFsOVJWWWNtM2JZATmh3bmNxZA04teWxuME5vRlAyZA01vVnFCR21kZAVNiaDg0QzBiaF9vX1pzbUtMd3gwVEtDazdsWE12eldnd19fU1hiR0d3"
+    }
+  }
+}
