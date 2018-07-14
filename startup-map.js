@@ -6,6 +6,7 @@ var StartUpMap = function() {
     //curl -v "https://graph.facebook.com/oauth/access_token?client_id=596459477406669&client_secret=[app-secret]&grant_type=client_credentials"
     // App Access Token
     this.facebookAccessToken = "596459477406669|fLY1Ckxs-uWttk-RnBOmKJdiiIs";
+    this.googleMapsApiToken = "AIzaSyB5T8aWSEsK0bMuYiSjUtzQRp9GUCE6mDA";
 
     var fnResolveStartUpsLoaded;
     this.pStartupsLoaded = new Promise(function(resolve) {
@@ -159,92 +160,127 @@ StartUpMap.prototype.loadEventLayer = function() {
 
     fetch("facebook-group-or-page-ids.json").then(function(response) {
         return response.json();
-    }).then(function(aFacebookPageEventIds) {
-        var aPromises = aFacebookPageEventIds.map(function(aFacebookId) {
-            var pPromise = new Promise(function(resolve, reject) {
-                FB.api(
-                    "/" + aFacebookId + "/events", { access_token: me.facebookAccessToken },
-                    function(response) {
-                        if (response && !response.error) {
-                            resolve(response);
-                        } else if (response) {
-                            console.log(response.error);
-                            resolve({ "data": [] });
-                        }
-                    }
-                );
-            });
-            return pPromise;
-        });
-        if (window.location.hash.match(/.*AddDebugEvent.*/)) {
-            aPromises.push(fetch("test-data/FaceBookEvent.json").then(function(response) {
-                return response.json();
-            }));
-        }
-        aPromises.push(me.pMeetupEventsLoaded.then(function(oMeetups) {
-            return new Promise(function(resolve) {
-                resolve({ "data": oMeetups.events.map(me.mapMeetupEventToFacebookEvent) });
-            });
-        }));
-        return Promise.all(aPromises);
-    }).then(function(aFacebookPageEvents) {
+    }).then(this._fetchFacebookPageEvents.bind(this)).then(function(aFacebookPageEvents) {
 
         var aEvents = [];
         aFacebookPageEvents.forEach(function(oItem) {
             aEvents.push.apply(aEvents, oItem.data);
         });
 
-        var aEventFeatures = aEvents.map(function(oEvent) {
-            var oProperties = {
-                "name": oEvent.name,
-                "id": oEvent.id,
-                "marker": "circle",
-                "description": oEvent.description,
-                "start_time": oEvent.start_time,
-                "end_time": oEvent.end_time
-            };
-            var latitude = 0;
-            var longitude = 0;
-            if ("link" in oEvent) {
-                oProperties["link"] = oEvent.link;
-            } else {
-                oProperties["link"] = "<a href=\"https://www.facebook.com/events/" + oEvent.id + "\">Facebook Event</a>";
-            }
-            if ("place" in oEvent) {
-                oProperties["place_name"] = oEvent.place.name;
-                oProperties["place_location_city"] = oEvent.place.location.city;
-                oProperties["place_location_country"] = oEvent.place.location.country;
-                oProperties["place_location_street"] = oEvent.place.location.street;
-                oProperties["place_location_zip"] = oEvent.place.location.zip;
-                oProperties["place_id"] = oEvent.place.id;
-                latitude = oEvent.place.location.latitude;
-                longitude = oEvent.place.location.longitude;
-            }
-            return {
+        var aEventFeaturePromises = aEvents.map(me._aEventesToGeoFeaturePromises.bind(me));
+        Promise.all(aEventFeaturePromises).then(function(aEventFeatures) {
+            me.map.addLayer({
+                "id": "events",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": aEventFeatures
+                    }
+                },
+                "layout": {
+                    "icon-image": "{marker}-15"
+                }
+            });
+        });
+    });
+};
+StartUpMap.prototype._aEventesToGeoFeaturePromises = function(oEvent) {
+    var me = this;
+    var oProperties = {
+        "name": oEvent.name,
+        "id": oEvent.id,
+        "marker": "circle",
+        "description": oEvent.description,
+        "start_time": oEvent.start_time,
+        "end_time": oEvent.end_time
+    };
+    var latitude = 0;
+    var longitude = 0;
+    if ("link" in oEvent) {
+        oProperties["link"] = oEvent.link;
+    } else {
+        oProperties["link"] = "<a href=\"https://www.facebook.com/events/" + oEvent.id + "\">Facebook Event</a>";
+    }
+    if (!("place" in oEvent)) {
+        return new Promise.resolve();
+    }
+    oProperties["place_name"] = oEvent.place.name;
+    if ("location" in oEvent.place) {
+        oProperties["place_location_city"] = oEvent.place.location.city;
+        oProperties["place_location_country"] = oEvent.place.location.country;
+        oProperties["place_location_street"] = oEvent.place.location.street;
+        oProperties["place_location_zip"] = oEvent.place.location.zip;
+        oProperties["place_id"] = oEvent.place.id;
+        latitude = oEvent.place.location.latitude;
+        longitude = oEvent.place.location.longitude;
+        return new Promise(function(resolve) {
+            resolve({
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
                     "coordinates": [longitude, latitude]
                 },
                 "properties": oProperties
-            };
+            });
         });
-
-        me.map.addLayer({
-            "id": "events",
-            "type": "symbol",
-            "source": {
-                "type": "geojson",
-                "data": {
-                    "type": "FeatureCollection",
-                    "features": aEventFeatures
+    } else {
+        return new Promise(function(resolve) {
+            fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(oEvent.place.name) + "&key=" + me.googleMapsApiToken).then(function(oResponse) {
+                return oResponse.json();
+            }).then(function(oLocation) {
+                try {
+                    if ("results" in oLocation && oLocation.results.length > 0) {
+                        var dGoogleLongitude = oLocation.results[0].geometry.location.lng;
+                        var dGoogleLatitude = oLocation.results[0].geometry.location.lat;
+                        resolve({
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [dGoogleLongitude, dGoogleLatitude]
+                            },
+                            "properties": oProperties
+                        });
+                    }
+                    resolve();
+                } catch (e) {
+                    console.log(e);
+                    resolve();
                 }
-            },
-            "layout": {
-                "icon-image": "{marker}-15"
-            }
+            });
         });
+    }
+};
+StartUpMap.prototype._fetchFacebookPageEvents = function(aFacebookPageEventIds) {
+    var me = this;
+    var aPromises = aFacebookPageEventIds.map(function(aFacebookId) {
+        var pPromise = new Promise(function(resolve, reject) {
+            FB.api(
+                "/" + aFacebookId + "/events", { access_token: me.facebookAccessToken },
+                function(response) {
+                    if (response && !response.error) {
+                        resolve(response);
+                    } else if (response) {
+                        console.log(response.error);
+                        resolve({ "data": [] });
+                    }
+                }
+            );
+        });
+        return pPromise;
     });
+    if (window.location.hash.match(/.*AddDebugEvent.*/)) {
+        aPromises.push(fetch("test-data/FaceBookEvent.json").then(function(response) {
+            return response.json();
+        }));
+    }
+    aPromises.push(me.pMeetupEventsLoaded.then(function(oMeetups) {
+        return new Promise(function(resolve) {
+            resolve({ "data": oMeetups.events.map(me.mapMeetupEventToFacebookEvent) });
+        });
+    }));
+    return Promise.all(aPromises);
 };
 StartUpMap.prototype.loadMeetupEvents = function() {
     var s = document.createElement("script");
